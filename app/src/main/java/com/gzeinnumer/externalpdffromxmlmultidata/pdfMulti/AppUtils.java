@@ -1,12 +1,10 @@
-package com.gzeinnumer.externalpdffromxmlmultidata.helper.functionGlobalPDFMulti;
+package com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.gzeinnumer.externalpdffromxmlmultidata.helper.FunctionGlobalDir;
 
 import java.io.File;
 import java.util.List;
@@ -42,7 +40,7 @@ public class AppUtils {
     }
 
     public static String createPDFPath() {
-        File folder = new File(FunctionGlobalDir.getStorageCard + FunctionGlobalDir.appFolder);
+        File folder = new File(FunctionGlobalPDF.getStorageCard + FunctionGlobalPDF.appFolder);
         if (!folder.exists()) {
             folder.mkdirs();
         }

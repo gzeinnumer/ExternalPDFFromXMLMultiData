@@ -1,4 +1,4 @@
-package com.gzeinnumer.externalpdffromxmlmultidata.helper.functionGlobalPDFMulti;
+package com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,10 +54,10 @@ public class RVAdapterForPDF extends RecyclerView.Adapter<RVAdapterForPDF.MyHold
     }
 
     public static class MyModelPDF {
-        private int id;
-        private String name;
-        private String code;
-        private String image;
+        private final int id;
+        private final String name;
+        private final String code;
+        private final String image;
 
         public MyModelPDF(int id, String name, String code, String image) {
             this.id = id;

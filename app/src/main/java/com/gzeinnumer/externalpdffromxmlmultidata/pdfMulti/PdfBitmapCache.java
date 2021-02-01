@@ -1,4 +1,4 @@
-package com.gzeinnumer.externalpdffromxmlmultidata.helper.functionGlobalPDFMulti;
+package com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti;
 
 import android.app.ActivityManager;
 import android.content.Context;

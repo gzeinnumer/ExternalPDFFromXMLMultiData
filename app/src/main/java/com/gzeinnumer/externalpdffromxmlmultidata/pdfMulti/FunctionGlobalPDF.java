@@ -1,19 +1,19 @@
-package com.gzeinnumer.externalpdffromxmlmultidata.helper;
+package com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti;
 
 import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
 
-public class FunctionGlobalDir {
+public class FunctionGlobalPDF {
 
     public static String getStorageCard = Environment.getExternalStorageDirectory().toString();
     public static String appFolder = "/ExternalPDFFromXMLMultiData";
 
     private static final String TAG = "FunctionGlobalDir_";
 
-    public static void myLogD(String tag,String msg){
-        Log.d("MyZein", tag+"_"+msg);
+    public static void myLogD(String tag, String msg) {
+        Log.d("MyZein", tag + "_" + msg);
     }
 
     public static boolean initFolder() {
@@ -22,9 +22,7 @@ public class FunctionGlobalDir {
         // create folder
         folder = new File(getStorageCard + appFolder);
         if (!folder.exists()) {
-            if (!creatingFolder(folder)){
-                return false;
-            }
+            return creatingFolder(folder);
         }
         return true;
     }

@@ -1,4 +1,4 @@
-package com.gzeinnumer.externalpdffromxmlmultidata.helper.functionGlobalPDFMulti;
+package com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -10,7 +10,7 @@ import java.util.List;
 public class FunctionGlobalPDFMulti {
 
     private static boolean IS_MANY_PDF_FILE;
-    private static int SECTOR = 100; // Default value for one pdf file.
+    private static final int SECTOR = 100; // Default value for one pdf file.
     private static int START;
     private static int END = SECTOR;
     private static int NO_OF_PDF_FILE = 1;

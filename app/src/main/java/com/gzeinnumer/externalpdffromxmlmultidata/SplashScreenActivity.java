@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.gzeinnumer.externalpdffromxmlmultidata.helper.FunctionGlobalDir;
+import com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti.FunctionGlobalPDF;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,18 +46,18 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void onSuccessCheckPermitions() {
-        if (FunctionGlobalDir.initFolder()){
-            if (FunctionGlobalDir.isFileExists(FunctionGlobalDir.appFolder)){
-                msg+="Sudah bisa lanjut\n";
+        if (FunctionGlobalPDF.initFolder()) {
+            if (FunctionGlobalPDF.isFileExists(FunctionGlobalPDF.appFolder)) {
+                msg += "Sudah bisa lanjut\n";
                 tv.setText(msg);
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             } else {
-                msg+="Direktory tidak ditemukan\n";
+                msg += "Direktory tidak ditemukan\n";
                 tv.setText(msg);
             }
         } else {
-            msg+="Gagal membuat folder\n";
+            msg += "Gagal membuat folder\n";
             tv.setText(msg);
         }
     }

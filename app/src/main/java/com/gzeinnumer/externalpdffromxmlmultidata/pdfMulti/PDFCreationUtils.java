@@ -1,4 +1,4 @@
-package com.gzeinnumer.externalpdffromxmlmultidata.helper.functionGlobalPDFMulti;
+package com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gzeinnumer.externalpdffromxmlmultidata.R;
-import com.gzeinnumer.externalpdffromxmlmultidata.helper.FunctionGlobalDir;
 
 import org.apache.pdfbox.io.MemoryUsageSetting;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
@@ -65,7 +63,7 @@ public class PDFCreationUtils {
         SECTOR = deviceHeight / sizeInPixel;
         TOTAL_PROGRESS_BAR = totalPDFModelSize / SECTOR;
 
-        mPDFCreationRV = (RecyclerView) mPDFCreationView.findViewById(R.id.recycler_view_for_pdf);
+        mPDFCreationRV = mPDFCreationView.findViewById(R.id.recycler_view_for_pdf);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
         mPDFCreationRV.setLayoutManager(mLayoutManager);
 
@@ -235,7 +233,7 @@ public class PDFCreationUtils {
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         deviceHeight = displayMetrics.heightPixels;
         deviceWidth = displayMetrics.widthPixels;
-        FunctionGlobalDir.myLogD(TAG, "getWH: "+deviceHeight+"_"+deviceWidth);
+        FunctionGlobalPDF.myLogD(TAG, "getWH: " + deviceHeight + "_" + deviceWidth);
     }
 
     public interface PDFCallback {

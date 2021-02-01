@@ -1,9 +1,5 @@
 package com.gzeinnumer.externalpdffromxmlmultidata;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,8 +10,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gzeinnumer.externalpdffromxmlmultidata.helper.functionGlobalPDFMulti.FunctionGlobalPDFMulti;
-import com.gzeinnumer.externalpdffromxmlmultidata.helper.functionGlobalPDFMulti.RVAdapterForPDF;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti.FunctionGlobalPDFMulti;
+import com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti.RVAdapterForPDF;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements FunctionGlobalPDF
 
     private RVAdapterForPDF adapter;
     private RecyclerView rv;
-    private List<RVAdapterForPDF.MyModelPDF> list = new ArrayList<>();
+    private final List<RVAdapterForPDF.MyModelPDF> list = new ArrayList<>();
     private TextView btnPdfPath;
     private Button btnSharePdfFile;
 
