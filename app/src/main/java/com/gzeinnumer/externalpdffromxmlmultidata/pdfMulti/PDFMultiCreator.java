@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class FunctionGlobalPDFMulti {
+public class PDFMultiCreator {
 
     private static boolean IS_MANY_PDF_FILE;
     private static final int SECTOR = 100; // Default value for one pdf file.
@@ -43,8 +43,8 @@ public class FunctionGlobalPDFMulti {
 
     public static void createPDFFile(final List<RVAdapterForPDF.MyModelPDF> list, final Context context, final Activity activity) {
         final List<RVAdapterForPDF.MyModelPDF> pdfDataList = list.subList(START, END);
-        PdfBitmapCache.clearMemory();
-        PdfBitmapCache.initBitmapCache(context);
+        PDFBitmapCache.clearMemory();
+        PDFBitmapCache.initBitmapCache(context);
         final PDFCreationUtils pdfCreationUtils = new PDFCreationUtils(activity, pdfDataList, LIST_SIZE, NO_OF_PDF_FILE);
         if (NO_OF_PDF_FILE == 1) {
             createProgressBarForPDFCreation(PDFCreationUtils.TOTAL_PROGRESS_BAR, activity);

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.File;
 import java.util.List;
 
-public class AppUtils {
+public class PDFAppUtils {
 
     public static Bitmap findViewBitmap(final List<RVAdapterForPDF.MyModelPDF> currentPDFModels, int deviceWidth, int deviceHeight, RVAdapterForPDF pdfRootAdapter, RecyclerView mPDFCreationRV, View mPDFCreationView) {
         pdfRootAdapter.setList(currentPDFModels);
@@ -40,7 +40,7 @@ public class AppUtils {
     }
 
     public static String createPDFPath() {
-        File folder = new File(FunctionGlobalPDF.getStorageCard + FunctionGlobalPDF.appFolder);
+        File folder = new File(DirPDF.getStorageCard + DirPDF.appFolder);
         if (!folder.exists()) {
             folder.mkdirs();
         }

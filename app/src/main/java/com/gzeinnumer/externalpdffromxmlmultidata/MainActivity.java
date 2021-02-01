@@ -14,14 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti.FunctionGlobalPDFMulti;
+import com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti.PDFMultiCreator;
 import com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti.RVAdapterForPDF;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements FunctionGlobalPDFMulti.PDFCallBack{
+public class MainActivity extends AppCompatActivity implements PDFMultiCreator.PDFCallBack {
 
     private RVAdapterForPDF adapter;
     private RecyclerView rv;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements FunctionGlobalPDF
         findViewById(R.id.btn_create_pdf).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FunctionGlobalPDFMulti.generatePdfReport(list, getApplicationContext(), MainActivity.this);
+                PDFMultiCreator.generatePdfReport(list, getApplicationContext(), MainActivity.this);
             }
         });
     }

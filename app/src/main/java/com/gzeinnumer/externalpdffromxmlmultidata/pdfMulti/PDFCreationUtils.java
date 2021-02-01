@@ -82,8 +82,8 @@ public class PDFCreationUtils {
         if (pdfModelListSize <= SECTOR) {
             NUMBER_OF_PAGE = 1;
 
-            bitmapOfView = AppUtils.findViewBitmap(mCurrentPDFModels, deviceWidth, deviceHeight, pdfRootAdapter, mPDFCreationRV, mPDFCreationView);
-            PdfBitmapCache.addBitmapToMemoryCache(NUMBER_OF_PAGE, bitmapOfView);
+            bitmapOfView = PDFAppUtils.findViewBitmap(mCurrentPDFModels, deviceWidth, deviceHeight, pdfRootAdapter, mPDFCreationRV, mPDFCreationView);
+            PDFBitmapCache.addBitmapToMemoryCache(NUMBER_OF_PAGE, bitmapOfView);
             createPdf();
         } else {
             NUMBER_OF_PAGE = pdfModelListSize / SECTOR;
@@ -93,8 +93,8 @@ public class PDFCreationUtils {
             Map<Integer, List<RVAdapterForPDF.MyModelPDF>> listMap = createFinalData();
             for (int PAGE_INDEX = 1; PAGE_INDEX <= NUMBER_OF_PAGE; PAGE_INDEX++) {
                 List<RVAdapterForPDF.MyModelPDF> list = listMap.get(PAGE_INDEX);
-                bitmapOfView = AppUtils.findViewBitmap(list, deviceWidth, deviceHeight, pdfRootAdapter, mPDFCreationRV, mPDFCreationView);
-                PdfBitmapCache.addBitmapToMemoryCache(PAGE_INDEX, bitmapOfView);
+                bitmapOfView = PDFAppUtils.findViewBitmap(list, deviceWidth, deviceHeight, pdfRootAdapter, mPDFCreationRV, mPDFCreationView);
+                PDFBitmapCache.addBitmapToMemoryCache(PAGE_INDEX, bitmapOfView);
             }
             createPdf();
         }
@@ -126,7 +126,7 @@ public class PDFCreationUtils {
             public void run() {
                 for (int PAGE_INDEX = 1; PAGE_INDEX <= NUMBER_OF_PAGE; PAGE_INDEX++) {
 
-                    final Bitmap b = PdfBitmapCache.getBitmapFromMemCache(PAGE_INDEX);
+                    final Bitmap b = PDFBitmapCache.getBitmapFromMemCache(PAGE_INDEX);
                     PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(b.getWidth(), b.getHeight(), PAGE_INDEX).create();
                     PdfDocument.Page page = document.startPage(pageInfo);
                     Canvas canvas = page.getCanvas();
@@ -219,12 +219,12 @@ public class PDFCreationUtils {
     }
 
     private void createForEveryPDFFilePath() {
-        pathForEveryPdfFile = AppUtils.createPDFPath();
+        pathForEveryPdfFile = PDFAppUtils.createPDFPath();
         filePath.add(pathForEveryPdfFile);
     }
 
     private String createFinalPdfFilePath() {
-        finalPdfFile = AppUtils.createPDFPath();
+        finalPdfFile = PDFAppUtils.createPDFPath();
         return finalPdfFile;
     }
 
@@ -233,7 +233,7 @@ public class PDFCreationUtils {
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         deviceHeight = displayMetrics.heightPixels;
         deviceWidth = displayMetrics.widthPixels;
-        FunctionGlobalPDF.myLogD(TAG, "getWH: " + deviceHeight + "_" + deviceWidth);
+        DirPDF.myLogD(TAG, "getWH: " + deviceHeight + "_" + deviceWidth);
     }
 
     public interface PDFCallback {
