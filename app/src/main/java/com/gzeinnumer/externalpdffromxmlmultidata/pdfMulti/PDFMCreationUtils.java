@@ -26,7 +26,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PDFCreationUtils {
+public class PDFMCreationUtils {
     private static final String TAG = "PDFCreationUtils_";
 
     private int deviceHeight;
@@ -36,8 +36,8 @@ public class PDFCreationUtils {
     private int pdfModelListSize;
     private int SECTOR = 8; // default value
     private int NUMBER_OF_PAGE;
-    private List<RVAdapterForPDF.MyModelPDF> mCurrentPDFModels;
-    private RVAdapterForPDF pdfRootAdapter;
+    private List<PDFMRVAdapterFor.MyModelPDF> mCurrentPDFModels;
+    private PDFMRVAdapterFor pdfRootAdapter;
     private View mPDFCreationView;
     private RecyclerView mPDFCreationRV;
     public static int TOTAL_PROGRESS_BAR;
@@ -46,11 +46,12 @@ public class PDFCreationUtils {
     private Activity activity;
     private String finalPdfFile;
     private String pathForEveryPdfFile;
+    private PDFMCallback callback;
 
-    private PDFCreationUtils() {
+    private PDFMCreationUtils() {
     }
 
-    public PDFCreationUtils(Activity activity, List<RVAdapterForPDF.MyModelPDF> currentPdfModels, int totalPDFModelSize, int currentPDFIndex) {
+    public PDFMCreationUtils(Activity activity, List<PDFMRVAdapterFor.MyModelPDF> currentPdfModels, int totalPDFModelSize, int currentPDFIndex) {
         this.activity = activity;
         this.mCurrentPDFModels = currentPdfModels;
         this.mCurrentPDFIndex = currentPDFIndex;
@@ -67,43 +68,41 @@ public class PDFCreationUtils {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
         mPDFCreationRV.setLayoutManager(mLayoutManager);
 
-        pdfRootAdapter = new RVAdapterForPDF();
+        pdfRootAdapter = new PDFMRVAdapterFor();
 
         document = new PdfDocument();
         pdfModelListSize = currentPdfModels.size();
 
     }
 
-    private PDFCallback callback;
-
-    public void createPDF(PDFCallback callback) {
+    public void createPDF(PDFMCallback callback) {
         this.callback = callback;
 
         if (pdfModelListSize <= SECTOR) {
             NUMBER_OF_PAGE = 1;
 
-            bitmapOfView = PDFAppUtils.findViewBitmap(mCurrentPDFModels, deviceWidth, deviceHeight, pdfRootAdapter, mPDFCreationRV, mPDFCreationView);
-            PDFBitmapCache.addBitmapToMemoryCache(NUMBER_OF_PAGE, bitmapOfView);
+            bitmapOfView = PDFMAppUtils.findViewBitmap(mCurrentPDFModels, deviceWidth, deviceHeight, pdfRootAdapter, mPDFCreationRV, mPDFCreationView);
+            PDFMBitmapCache.addBitmapToMemoryCache(NUMBER_OF_PAGE, bitmapOfView);
             createPdf();
         } else {
             NUMBER_OF_PAGE = pdfModelListSize / SECTOR;
             if (pdfModelListSize % SECTOR != 0) {
                 NUMBER_OF_PAGE++;
             }
-            Map<Integer, List<RVAdapterForPDF.MyModelPDF>> listMap = createFinalData();
+            Map<Integer, List<PDFMRVAdapterFor.MyModelPDF>> listMap = createFinalData();
             for (int PAGE_INDEX = 1; PAGE_INDEX <= NUMBER_OF_PAGE; PAGE_INDEX++) {
-                List<RVAdapterForPDF.MyModelPDF> list = listMap.get(PAGE_INDEX);
-                bitmapOfView = PDFAppUtils.findViewBitmap(list, deviceWidth, deviceHeight, pdfRootAdapter, mPDFCreationRV, mPDFCreationView);
-                PDFBitmapCache.addBitmapToMemoryCache(PAGE_INDEX, bitmapOfView);
+                List<PDFMRVAdapterFor.MyModelPDF> list = listMap.get(PAGE_INDEX);
+                bitmapOfView = PDFMAppUtils.findViewBitmap(list, deviceWidth, deviceHeight, pdfRootAdapter, mPDFCreationRV, mPDFCreationView);
+                PDFMBitmapCache.addBitmapToMemoryCache(PAGE_INDEX, bitmapOfView);
             }
             createPdf();
         }
     }
 
-    private Map<Integer, List<RVAdapterForPDF.MyModelPDF>> createFinalData() {
+    private Map<Integer, List<PDFMRVAdapterFor.MyModelPDF>> createFinalData() {
         int START = 0;
         int END = SECTOR;
-        Map<Integer, List<RVAdapterForPDF.MyModelPDF>> map = new LinkedHashMap<>();
+        Map<Integer, List<PDFMRVAdapterFor.MyModelPDF>> map = new LinkedHashMap<>();
         int INDEX = 1;
         for (int i = 0; i < NUMBER_OF_PAGE; i++) {
             if (pdfModelListSize % SECTOR != 0) {
@@ -111,7 +110,7 @@ public class PDFCreationUtils {
                     END = START + pdfModelListSize % SECTOR;
                 }
             }
-            List<RVAdapterForPDF.MyModelPDF> list = mCurrentPDFModels.subList(START, END);
+            List<PDFMRVAdapterFor.MyModelPDF> list = mCurrentPDFModels.subList(START, END);
             START = END;
             END = SECTOR + END;
             map.put(INDEX, list);
@@ -126,7 +125,7 @@ public class PDFCreationUtils {
             public void run() {
                 for (int PAGE_INDEX = 1; PAGE_INDEX <= NUMBER_OF_PAGE; PAGE_INDEX++) {
 
-                    final Bitmap b = PDFBitmapCache.getBitmapFromMemCache(PAGE_INDEX);
+                    final Bitmap b = PDFMBitmapCache.getBitmapFromMemCache(PAGE_INDEX);
                     PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(b.getWidth(), b.getHeight(), PAGE_INDEX).create();
                     PdfDocument.Page page = document.startPage(pageInfo);
                     Canvas canvas = page.getCanvas();
@@ -219,12 +218,12 @@ public class PDFCreationUtils {
     }
 
     private void createForEveryPDFFilePath() {
-        pathForEveryPdfFile = PDFAppUtils.createPDFPath();
+        pathForEveryPdfFile = PDFMAppUtils.createPDFPath();
         filePath.add(pathForEveryPdfFile);
     }
 
     private String createFinalPdfFilePath() {
-        finalPdfFile = PDFAppUtils.createPDFPath();
+        finalPdfFile = PDFMAppUtils.createPDFPath();
         return finalPdfFile;
     }
 
@@ -233,13 +232,16 @@ public class PDFCreationUtils {
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         deviceHeight = displayMetrics.heightPixels;
         deviceWidth = displayMetrics.widthPixels;
-        DirPDF.myLogD(TAG, "getWH: " + deviceHeight + "_" + deviceWidth);
+        DirPDFM.myLogD(TAG, "getWH: " + deviceHeight + "_" + deviceWidth);
     }
 
-    public interface PDFCallback {
+    public interface PDFMCallback {
         void onProgress(int progress);
+
         void onCreateEveryPdfFile();
+
         void onComplete(String filePath);
+
         void onError(Exception e);
     }
 }

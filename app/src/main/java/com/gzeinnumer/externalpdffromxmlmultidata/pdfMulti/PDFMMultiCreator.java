@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class PDFMultiCreator {
+public class PDFMMultiCreator {
 
     private static boolean IS_MANY_PDF_FILE;
     private static final int SECTOR = 100; // Default value for one pdf file.
@@ -26,7 +26,7 @@ public class PDFMultiCreator {
 
     private static final String TAG = "FunctionGlobalPDFMulti_";
 
-    public static void generatePdfReport(List<RVAdapterForPDF.MyModelPDF> list, Context applicationContext, Activity activity) {
+    public static void generatePdfReport(List<PDFMRVAdapterFor.MyModelPDF> list, Context applicationContext, Activity activity) {
         pdfCallBack = (PDFCallBack) activity;
         LIST_SIZE = list.size();
         NO_OF_FILE = LIST_SIZE / SECTOR;
@@ -41,15 +41,15 @@ public class PDFMultiCreator {
         createPDFFile(list, applicationContext, activity);
     }
 
-    public static void createPDFFile(final List<RVAdapterForPDF.MyModelPDF> list, final Context context, final Activity activity) {
-        final List<RVAdapterForPDF.MyModelPDF> pdfDataList = list.subList(START, END);
-        PDFBitmapCache.clearMemory();
-        PDFBitmapCache.initBitmapCache(context);
-        final PDFCreationUtils pdfCreationUtils = new PDFCreationUtils(activity, pdfDataList, LIST_SIZE, NO_OF_PDF_FILE);
+    public static void createPDFFile(final List<PDFMRVAdapterFor.MyModelPDF> list, final Context context, final Activity activity) {
+        final List<PDFMRVAdapterFor.MyModelPDF> pdfDataList = list.subList(START, END);
+        PDFMBitmapCache.clearMemory();
+        PDFMBitmapCache.initBitmapCache(context);
+        final PDFMCreationUtils PDFMCreationUtils = new PDFMCreationUtils(activity, pdfDataList, LIST_SIZE, NO_OF_PDF_FILE);
         if (NO_OF_PDF_FILE == 1) {
-            createProgressBarForPDFCreation(PDFCreationUtils.TOTAL_PROGRESS_BAR, activity);
+            createProgressBarForPDFCreation(com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti.PDFMCreationUtils.TOTAL_PROGRESS_BAR, activity);
         }
-        pdfCreationUtils.createPDF(new PDFCreationUtils.PDFCallback() {
+        PDFMCreationUtils.createPDF(new com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti.PDFMCreationUtils.PDFMCallback() {
 
             @Override
             public void onProgress(final int i) {
@@ -63,7 +63,7 @@ public class PDFMultiCreator {
                     if (NO_OF_FILE == NO_OF_PDF_FILE - 1) {
                         progressDialog.dismiss();
                         createProgressBarForMergePDF(activity);
-                        pdfCreationUtils.downloadAndCombinePDFs();
+                        PDFMCreationUtils.downloadAndCombinePDFs();
                     } else {
                         START = END;
                         if (LIST_SIZE % SECTOR != 0) {
@@ -77,7 +77,7 @@ public class PDFMultiCreator {
                 } else {
                     progressDialog.dismiss();
                     createProgressBarForMergePDF(activity);
-                    pdfCreationUtils.downloadAndCombinePDFs();
+                    PDFMCreationUtils.downloadAndCombinePDFs();
                 }
             }
 

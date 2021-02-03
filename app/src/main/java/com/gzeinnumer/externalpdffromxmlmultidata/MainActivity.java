@@ -14,18 +14,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti.PDFMultiCreator;
-import com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti.RVAdapterForPDF;
+import com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti.PDFMMultiCreator;
+import com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti.PDFMRVAdapterFor;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements PDFMultiCreator.PDFCallBack {
+public class MainActivity extends AppCompatActivity implements PDFMMultiCreator.PDFCallBack {
 
-    private RVAdapterForPDF adapter;
+    private final List<PDFMRVAdapterFor.MyModelPDF> list = new ArrayList<>();
     private RecyclerView rv;
-    private final List<RVAdapterForPDF.MyModelPDF> list = new ArrayList<>();
+    private PDFMRVAdapterFor adapter;
     private TextView btnPdfPath;
     private Button btnSharePdfFile;
 
@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity implements PDFMultiCreator.P
         btnSharePdfFile = findViewById(R.id.btn_share_pdf);
         btnPdfPath = findViewById(R.id.btn_pdf_path);
 
-        adapter = new RVAdapterForPDF();
+        adapter = new PDFMRVAdapterFor();
         for(int i=0; i<30; i++){
-            list.add(new RVAdapterForPDF.MyModelPDF(i, "Item "+i, "Code", ""));
+            list.add(new PDFMRVAdapterFor.MyModelPDF(i, "Item " + i, "Code", ""));
         }
         adapter.setList(list);
 
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements PDFMultiCreator.P
         findViewById(R.id.btn_create_pdf).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PDFMultiCreator.generatePdfReport(list, getApplicationContext(), MainActivity.this);
+                PDFMMultiCreator.generatePdfReport(list, getApplicationContext(), MainActivity.this);
             }
         });
     }

@@ -13,10 +13,11 @@ import com.gzeinnumer.externalpdffromxmlmultidata.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RVAdapterForPDF extends RecyclerView.Adapter<RVAdapterForPDF.MyHolder> {
+public class PDFMRVAdapterFor extends RecyclerView.Adapter<PDFMRVAdapterFor.MyHolder> {
     private List<MyModelPDF> list = new ArrayList<>();
 
-    public RVAdapterForPDF() {}
+    public PDFMRVAdapterFor() {
+    }
 
     public void setList(List<MyModelPDF> list) {
         this.list = list;

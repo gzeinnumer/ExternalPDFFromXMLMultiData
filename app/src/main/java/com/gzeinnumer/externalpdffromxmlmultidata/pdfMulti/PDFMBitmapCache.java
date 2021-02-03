@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 
 import androidx.collection.LruCache;
 
-public class PDFBitmapCache {
+public class PDFMBitmapCache {
 
     private static LruCache<Integer, Bitmap> memoryCache = null;
 

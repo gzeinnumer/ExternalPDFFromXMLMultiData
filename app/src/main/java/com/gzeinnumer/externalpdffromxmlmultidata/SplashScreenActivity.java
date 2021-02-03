@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti.DirPDF;
+import com.gzeinnumer.externalpdffromxmlmultidata.pdfMulti.DirPDFM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +46,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void onSuccessCheckPermitions() {
-        if (DirPDF.initFolder()) {
-            if (DirPDF.isFileExists(DirPDF.appFolder)) {
+        if (DirPDFM.initFolder()) {
+            if (DirPDFM.isFileExists(DirPDFM.appFolder)) {
                 msg += "Sudah bisa lanjut\n";
                 tv.setText(msg);
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));

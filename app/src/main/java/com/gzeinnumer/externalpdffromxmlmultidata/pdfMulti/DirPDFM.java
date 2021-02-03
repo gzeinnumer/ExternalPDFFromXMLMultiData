@@ -5,7 +5,7 @@ import android.util.Log;
 
 import java.io.File;
 
-public class DirPDF {
+public class DirPDFM {
 
     public static String getStorageCard = Environment.getExternalStorageDirectory().toString();
     public static String appFolder = "/ExternalPDFFromXMLMultiData";
